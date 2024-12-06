@@ -11,6 +11,7 @@ public class Main {
         Employee[] employees = new Employee[5];
 
 
+
         employees[0] = new Employee("Ivanov Ivan", "Business Analyst", "ivanov@mail.com", "1234567890", 60000, 30);
         employees[1] = new Employee("Petrova Anna", "Java developer", "anna@mail.com", "2345678901", 80000, 28);
         employees[2] = new Employee("Sidorov Alexey", "QA", "alexey@mail.com", "3456789012", 50000, 35);
