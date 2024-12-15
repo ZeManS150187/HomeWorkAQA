@@ -1,9 +1,12 @@
 import java.util.*;
 import Lesson10.*;
+import Lesson12.*;
+
+import static Lesson12.ArrayProcessor.processArray;
 
 public class Main {
     public static void main(String[] args) {
-      //Задание 1
+        //Задание 1
         // Создаем массив котов
         List<Cat> cats = new ArrayList<>();
         cats.add(new Cat());
@@ -61,5 +64,51 @@ public class Main {
 
         System.out.println("\nТреугольник:");
         triangle.printCharacteristics("Желтый", "Фиолетовый");
+
+
+        //Практическое задание 12
+        ArrayProcessor arrayProcessor = new ArrayProcessor();
+
+
+        // Пример массива
+        String[][] validArray = {
+                {"1", "2", "3", "4"},
+                {"5", "6", "7", "8"},
+                {"9", "10", "11", "12"},
+                {"13", "14", "15", "16"}
+        };
+
+        String[][] invalidSizeArray = {
+                {"1", "2", "3"},
+                {"4", "5", "6"},
+                {"7", "8", "9"}
+        };
+
+        String[][] invalidDataArray = {
+                {"1", "2", "3", "4"},
+                {"5", "6", "7", "8"},
+                {"9", "10", "XX", "12"},
+                {"13", "14", "15", "16"}
+        };
+
+        // Обрабатываем массивы
+        try {
+            System.out.println("Сумма элементов validArray: " + processArray(validArray));
+        } catch (MyArraySizeException | MyArrayDataException e) {
+            System.err.println(e.getMessage());
+        }
+
+        try {
+            System.out.println("Сумма элементов invalidSizeArray: " + processArray(invalidSizeArray));
+        } catch (MyArraySizeException | MyArrayDataException e) {
+            System.err.println(e.getMessage());
+        }
+
+        try {
+            System.out.println("Сумма элементов invalidDataArray: " + processArray(invalidDataArray));
+        } catch (MyArraySizeException | MyArrayDataException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }
+
