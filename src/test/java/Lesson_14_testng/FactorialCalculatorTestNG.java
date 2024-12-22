@@ -8,20 +8,20 @@ public class FactorialCalculatorTestNG {
 
     @Test
     public void testFactorialOfZero() {
-        assertEquals(FactorialCalculator.calculateFactorial(0), 1, "Factorial of 0 should be 1");
+        assertEquals(FactorialCalculator.calculateFactorial(0), 1, "Факториал 0, должен быть 1");
     }
 
     @Test
     public void testFactorialOfPositiveNumber() {
-        assertEquals(FactorialCalculator.calculateFactorial(5), 120, "Factorial of 5 should be 120");
+        assertEquals(FactorialCalculator.calculateFactorial(5), 120, "Факториал 5 должен быть 120.");
     }
 
     @Test
     public void testFactorialOfOne() {
-        assertEquals(FactorialCalculator.calculateFactorial(1), 1, "Factorial of 1 should be 1");
+        assertEquals(FactorialCalculator.calculateFactorial(1), 1, "Факториал 1 должен быть 1");
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Number must be non-negative.")
+    @Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Число должно быть неотрицательным.")
     public void testNegativeNumberThrowsException() {
         FactorialCalculator.calculateFactorial(-1);
     }
