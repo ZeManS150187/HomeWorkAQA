@@ -119,6 +119,103 @@ public class MtsPaymentPage {
         return text;
     }
 
+    // Метод для проверки наличия иконки Visa
+    public boolean isVisaIconPresent() {
+        // Переключение в iframe
+        WebElement iframe = driver.findElement(By.cssSelector(".bepaid-iframe"));
+        driver.switchTo().frame(iframe);
+
+        // Явное ожидание видимости элемента иконки
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            // XPath для поиска изображения иконки Visa
+            WebElement visaIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//img[contains(@src, 'visa')]")
+            ));
+
+            // Проверка, что иконка отображается
+            return visaIcon.isDisplayed();
+        } catch (Exception e) {
+            // Если иконка не найдена, возвращаем false
+            return false;
+        } finally {
+            // Возврат в основной контекст
+            driver.switchTo().defaultContent();
+        }
+    }
+
+    // Метод для проверки наличия иконки MasterCard
+    public boolean isMasterCardIconPresent() {
+        // Переключение в iframe
+        WebElement iframe = driver.findElement(By.cssSelector(".bepaid-iframe"));
+        driver.switchTo().frame(iframe);
+
+        // Явное ожидание видимости элемента иконки
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            // XPath для поиска изображения иконки Visa
+            WebElement masterCardIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//img[contains(@src, 'mastercard-system.svg')]")
+            ));
+
+            // Проверка, что иконка отображается
+            return masterCardIcon.isDisplayed();
+        } catch (Exception e) {
+            // Если иконка не найдена, возвращаем false
+            return false;
+        } finally {
+            // Возврат в основной контекст
+            driver.switchTo().defaultContent();
+        }
+    }
+
+    // Метод для проверки наличия иконки BelCard
+    public boolean isBelCardIconPresent() {
+        // Переключение в iframe
+        WebElement iframe = driver.findElement(By.cssSelector(".bepaid-iframe"));
+        driver.switchTo().frame(iframe);
+
+        // Явное ожидание видимости элемента иконки
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            // XPath для поиска изображения иконки Visa
+            WebElement belCardIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//img[contains(@src, 'belkart-system.svg')]")
+            ));
+
+            // Проверка, что иконка отображается
+            return belCardIcon.isDisplayed();
+        } catch (Exception e) {
+            // Если иконка не найдена, возвращаем false
+            return false;
+        } finally {
+            // Возврат в основной контекст
+            driver.switchTo().defaultContent();
+        }
+    }
+
+    public boolean isSecondIconAppearingAfterFirst() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.switchTo().frame(driver.findElement(By.cssSelector(".bepaid-iframe")));
+
+        try {
+            // Ждём первую иконку
+            wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//img[contains(@src, 'mir-system-ru.svg')]")));
+
+            // Ждём, пока вторая иконка заменит первую
+            wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//img[contains(@src, 'maestro-system.svg')]")));
+
+            return true; // Если обе иконки появились поочередно
+        } catch (Exception e) {
+            return false; // Если вторая иконка не появилась
+        } finally {
+            driver.switchTo().defaultContent();
+        }
+    }
+
+
 
 
 

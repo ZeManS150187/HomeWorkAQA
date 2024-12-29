@@ -68,10 +68,16 @@ public class MtsByTests {
         paymentPage.enterEmail("test@example.com");
         paymentPage.clickContinueButton();
 
+
         assert paymentPage.getNumberCard().equals("Номер карты") : "Подсказка в поле 'Номер карты' некорректна";
         assert paymentPage.getValidity().equals("Срок действия") : "Подсказка в поле 'Срок действия' некорректна";
         assert paymentPage.getCVC().equals("CVC") : "Подсказка в поле 'CVC' некорректна";
         assert paymentPage.getName().equals("Имя держателя (как на карте)") : "Подсказка в поле 'Имя держателя (как на карте)' некорректна";
+
+        assert paymentPage.isVisaIconPresent() : "Иконка Visa не отображается";
+        assert paymentPage.isMasterCardIconPresent() : "Иконка MasterCard не отображается";
+        assert paymentPage.isBelCardIconPresent() : "Иконка BelCard не отображается";
+        assert paymentPage.isSecondIconAppearingAfterFirst() : "Ни одна из иконок не отображается";
 
     }
 
