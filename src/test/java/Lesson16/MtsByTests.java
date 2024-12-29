@@ -61,10 +61,13 @@ public class MtsByTests {
 
     @Test
     public void testFormSubmissionCard() {
+        String expectedSum = "100";
+        String phoneNumber = "297777777";
+
         // Заполняем форму для услуги "Услуги связи" и проверяем результат
         paymentPage.selectServiceType("Услуги связи");
-        paymentPage.enterPhoneNumber("297777777");
-        paymentPage.enterSum("100");
+        paymentPage.enterPhoneNumber(phoneNumber);
+        paymentPage.enterSum(expectedSum);
         paymentPage.enterEmail("test@example.com");
         paymentPage.clickContinueButton();
 
@@ -78,6 +81,13 @@ public class MtsByTests {
         assert paymentPage.isMasterCardIconPresent() : "Иконка MasterCard не отображается";
         assert paymentPage.isBelCardIconPresent() : "Иконка BelCard не отображается";
         assert paymentPage.isSecondIconAppearingAfterFirst() : "Ни одна из иконок не отображается";
+        String displayedSum = paymentPage.getDisplayedSum();
+        String expectedSumm = expectedSum + ".00 BYN";
+        assert expectedSumm.equals(displayedSum) : "Сумма, отображенная на странице, не совпадает с введенной!";
+
+        String displayedPhone =  paymentPage.getDisplayedPhone();
+        String phone = "Оплата: Услуги связи Номер:375" + phoneNumber;
+        assert phone.equals(displayedPhone) : "Номер, отображенный на странице, не совпадает с введенной!";
 
     }
 

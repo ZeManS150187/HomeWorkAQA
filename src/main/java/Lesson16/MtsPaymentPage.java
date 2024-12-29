@@ -215,6 +215,45 @@ public class MtsPaymentPage {
         }
     }
 
+    public String getDisplayedSum() {
+        // Переключаемся в iframe, если требуется
+        WebElement iframe = driver.findElement(By.cssSelector(".bepaid-iframe"));
+        driver.switchTo().frame(iframe);
+
+        // Явное ожидание, чтобы сумма отобразилась
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement displayedSumElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//app-payment-container//div[1]/span[1]")) // XPath для суммы на странице
+        );
+
+        // Получаем текст суммы
+        String displayedSum = displayedSumElement.getText().trim();
+
+        // Возвращаем в основной контекст
+        driver.switchTo().defaultContent();
+
+        return displayedSum;
+    }
+
+    public String getDisplayedPhone() {
+        // Переключаемся в iframe, если требуется
+        WebElement iframe = driver.findElement(By.cssSelector(".bepaid-iframe"));
+        driver.switchTo().frame(iframe);
+
+        // Явное ожидание, чтобы номер телефона отобразился
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement displayedPhoneElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//app-payment-container//div[2]/span")) // XPath для номера телефона на странице
+        );
+
+        // Получаем текст номера
+        String displayedPhone = displayedPhoneElement.getText().trim();
+
+        // Возвращаем в основной контекст
+        driver.switchTo().defaultContent();
+
+        return displayedPhone;
+    }
 
 
 
