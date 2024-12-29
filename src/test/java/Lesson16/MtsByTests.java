@@ -3,7 +3,10 @@ package Lesson16;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
 
@@ -54,9 +57,63 @@ public class MtsByTests {
         paymentPage.enterSum("100");
         paymentPage.enterEmail("test@example.com");
         paymentPage.clickContinueButton();
+    }
 
+    @Test
+    public void testFormSubmissionCard() {
+        // Заполняем форму для услуги "Услуги связи" и проверяем результат
+        paymentPage.selectServiceType("Услуги связи");
+        paymentPage.enterPhoneNumber("297777777");
+        paymentPage.enterSum("100");
+        paymentPage.enterEmail("test@example.com");
+        paymentPage.clickContinueButton();
+
+        assert paymentPage.getNumberCard().equals("Номер карты") : "Подсказка в поле 'Номер карты' некорректна";
+        assert paymentPage.getValidity().equals("Срок действия") : "Подсказка в поле 'Срок действия' некорректна";
+        assert paymentPage.getCVC().equals("CVC") : "Подсказка в поле 'CVC' некорректна";
+        assert paymentPage.getName().equals("Имя держателя (как на карте)") : "Подсказка в поле 'Имя держателя (как на карте)' некорректна";
+
+    }
+
+    @Test
+    public void testImageIsDisplayed() {
+        // Локатор элемента Visa
+        By visaImageLocator = By.xpath("//img[@alt='Visa']");
+        // Поиск элемента
+        WebElement visaImage = driver.findElement(visaImageLocator);
+        // Проверка, что элемент отображается на странице
+        Assert.assertTrue(visaImage.isDisplayed(), "Элемент Visa не отображается на странице!");
+
+
+        // Локатор элемента Verified By Visa
+        By verifiedByVisaImageLocator = By.xpath("//img[@alt='Verified By Visa']");
+        // Поиск элемента
+        WebElement verifiedByVisaImage = driver.findElement(verifiedByVisaImageLocator);
+        // Проверка, что элемент отображается на странице
+        Assert.assertTrue(verifiedByVisaImage.isDisplayed(), "Элемент Verified By Visa не отображается на странице!");
+
+        // Локатор элемента  MasterCard
+        By MasterCardImageLocator = By.xpath("//img[@alt='MasterCard']");
+        // Поиск элемента
+        WebElement MasterCardImage = driver.findElement(MasterCardImageLocator);
+        // Проверка, что элемент отображается на странице
+        Assert.assertTrue(MasterCardImage.isDisplayed(), "Элемент MasterCard Secure Code не отображается на странице!");
+
+        // Локатор элемента  MasterCard Secure Code
+        By masterCardSecureCodeLocator = By.xpath("//img[@alt='MasterCard Secure Code']");
+        // Поиск элемента
+        WebElement MasterCardSecureCodeImage = driver.findElement(masterCardSecureCodeLocator);
+        // Проверка, что элемент отображается на странице
+        Assert.assertTrue(MasterCardSecureCodeImage.isDisplayed(), "Элемент MasterCard Secure Code не отображается на странице!");
+
+        // Локатор элемента  Белкарт
+        By belCardLocator = By.xpath("//img[@alt='Белкарт']");
+        // Поиск элемента
+        WebElement belCardImage = driver.findElement(belCardLocator);
+        // Проверка, что элемент отображается на странице
+        Assert.assertTrue(belCardImage.isDisplayed(), "Элемент Белкарт не отображается на странице!");
 
     }
 
 
-}
+    }
