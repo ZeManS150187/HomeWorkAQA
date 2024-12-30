@@ -4,11 +4,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
+
 
 public class MtsByTests {
 
@@ -49,6 +51,8 @@ public class MtsByTests {
         assert paymentPage.getEmailPlaceholder().equals("E-mail для отправки чека") : "Подсказка в поле 'E-mail' некорректна";
     }
 
+
+
     @Test
     public void testFormSubmission() {
         // Заполняем форму для услуги "Услуги связи" и проверяем результат
@@ -58,6 +62,10 @@ public class MtsByTests {
         paymentPage.enterEmail("test@example.com");
         paymentPage.clickContinueButton();
     }
+
+
+
+
 
     @Test
     public void testFormSubmissionCard() {
@@ -90,6 +98,10 @@ public class MtsByTests {
         assert phone.equals(displayedPhone) : "Номер, отображенный на странице, не совпадает с введенной!";
 
     }
+
+
+
+
 
     @Test
     public void testImageIsDisplayed() {
@@ -131,5 +143,59 @@ public class MtsByTests {
 
     }
 
+    @Test
+    public void testDropdownSelectionAndPlaceholders() {
+        // Локатор для <select> элемента
+        By dropdownLocator = By.id("pay");
+
+        // Инициализация объекта Select для работы с выпадающим списком
+        WebElement dropdownElement = driver.findElement(dropdownLocator);
+        Select dropdown = new Select(dropdownElement);
+
+        // Перебираем и выбираем каждый элемент списка по очереди
+        for (WebElement option : dropdown.getOptions()) {
+            String optionText = option.getText(); // Получаем текст текущего элемента
+            dropdown.selectByVisibleText(optionText); // Выбираем элемент по тексту
+
+            // Если выбран "Услуги связи", выполняем проверку подсказок
+            if (optionText.equals("Услуги связи")) {
+                // Проверяем наличие подсказок в полях
+                assert paymentPage.getPhoneNumberPlaceholder().equals("Номер телефона") : "Подсказка в поле 'Номер телефона' некорректна";
+                assert paymentPage.getSumPlaceholder().equals("Сумма") : "Подсказка в поле 'Сумма' некорректна";
+                assert paymentPage.getEmailPlaceholder().equals("E-mail для отправки чека") : "Подсказка в поле 'E-mail' некорректна";
+            }
+            if(optionText.equals("Домашний интернет")){
+                // Проверяем наличие подсказок в полях
+                assert paymentPage.getInternetPhonePlaceholder().equals("Номер абонента") : "Подсказка в поле 'Номер абонента' некорректна";
+                assert paymentPage.getInternetSumPlaceholder().equals("Сумма") : "Подсказка в поле 'Сумма' некорректна";
+                assert paymentPage.getInternetEmailPlaceholder().equals("E-mail для отправки чека") : "Подсказка в поле 'E-mail' некорректна";
+
+            }
+            if(optionText.equals("Рассрочка")){
+                // Проверяем наличие подсказок в полях
+                assert paymentPage.getInstalmentScorePlaceholder().equals("Номер счета на 44") : "Подсказка в поле 'Номер счета на 44' некорректна";
+                assert paymentPage.getInstalmentSumPlaceholder().equals("Сумма") : "Подсказка в поле 'Сумма' некорректна";
+                assert paymentPage.getInstalmentEmailPlaceholder().equals("E-mail для отправки чека") : "Подсказка в поле 'E-mail' некорректна";
+
+            }
+            if(optionText.equals("Задолженность")){
+                // Проверяем наличие подсказок в полях
+                assert paymentPage.getArrearsScorePlaceholder().equals("Номер счета на 2073") : "Подсказка в поле 'Номер счета на 2073' некорректна";
+                assert paymentPage.getArrearsSumPlaceholder().equals("Сумма") : "Подсказка в поле 'Сумма' некорректна";
+                assert paymentPage.getArrearsEmailPlaceholder().equals("E-mail для отправки чека") : "Подсказка в поле 'E-mail' некорректна";
+            }
+        }
+    }
+
+
 
     }
+
+
+
+
+
+
+
+
+

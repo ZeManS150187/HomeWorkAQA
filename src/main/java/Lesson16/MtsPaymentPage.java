@@ -31,6 +31,15 @@ public class MtsPaymentPage {
     private By cvcLocator = By.xpath("//label[text()='CVC']");
     private By nameLocator = By.xpath("//label[text()='Имя держателя (как на карте)']");
     private By popupLocator = By.xpath("//div[contains(@class, 'app-wrapper__content')]");
+    private By internetPhoneLocator = By.xpath("//*[@id='internet-phone']");
+    private By internetSumLocator = By.xpath("//*[@id='internet-sum']");
+    private By internetEmailLocator = By.xpath("//*[@id='internet-email']");
+    private By instalmentScoreLocator = By.xpath("//*[@id='score-instalment']");
+    private By instalmentSumLocator = By.xpath("//*[@id='instalment-sum']");
+    private By instalmentEmailLocator = By.xpath("//*[@id='instalment-email']");
+    private By arrearsScoreLocator = By.xpath("//*[@id='score-arrears']");
+    private By arrearsSumLocator = By.xpath("//*[@id='arrears-sum']");
+    private By arrearsEmailLocator = By.xpath("//*[@id='arrears-email']");
 
 
     // Методы взаимодействия
@@ -58,6 +67,54 @@ public class MtsPaymentPage {
         WebElement email = wait.until(ExpectedConditions.presenceOfElementLocated(emailLocator));
         return email.getAttribute("placeholder");
     }
+
+    public String getInternetPhonePlaceholder() {
+        WebElement phoneNumber = wait.until(ExpectedConditions.presenceOfElementLocated(internetPhoneLocator));
+        return phoneNumber.getAttribute("placeholder");
+    }
+
+    public String getInternetSumPlaceholder() {
+        WebElement phoneNumber = wait.until(ExpectedConditions.presenceOfElementLocated(internetSumLocator));
+        return phoneNumber.getAttribute("placeholder");
+    }
+
+    public String getInternetEmailPlaceholder() {
+        WebElement phoneNumber = wait.until(ExpectedConditions.presenceOfElementLocated(internetEmailLocator));
+        return phoneNumber.getAttribute("placeholder");
+    }
+
+    public String getInstalmentScorePlaceholder() {
+        WebElement phoneNumber = wait.until(ExpectedConditions.presenceOfElementLocated(instalmentScoreLocator));
+        return phoneNumber.getAttribute("placeholder");
+    }
+
+    public String getInstalmentSumPlaceholder() {
+        WebElement phoneNumber = wait.until(ExpectedConditions.presenceOfElementLocated(instalmentSumLocator));
+        return phoneNumber.getAttribute("placeholder");
+    }
+
+    public String getInstalmentEmailPlaceholder() {
+        WebElement phoneNumber = wait.until(ExpectedConditions.presenceOfElementLocated(instalmentEmailLocator));
+        return phoneNumber.getAttribute("placeholder");
+    }
+
+    public String getArrearsScorePlaceholder() {
+        WebElement phoneNumber = wait.until(ExpectedConditions.presenceOfElementLocated(arrearsScoreLocator));
+        return phoneNumber.getAttribute("placeholder");
+    }
+
+    public String getArrearsSumPlaceholder() {
+        WebElement phoneNumber = wait.until(ExpectedConditions.presenceOfElementLocated(arrearsSumLocator));
+        return phoneNumber.getAttribute("placeholder");
+    }
+
+    public String getArrearsEmailPlaceholder() {
+        WebElement phoneNumber = wait.until(ExpectedConditions.presenceOfElementLocated(arrearsEmailLocator));
+        return phoneNumber.getAttribute("placeholder");
+    }
+
+
+
 
 
     public String getNumberCard() {
